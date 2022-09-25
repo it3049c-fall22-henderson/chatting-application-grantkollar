@@ -52,7 +52,13 @@ function sendMessages(username, text) {
       timestamp: new Date()
   }
 
-  $.post(serverURL, newMessage);
+  fetch (serverURL, {
+      method: `POST`, 
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newMessage)
+  });
 }
 updateMessages();
 setInterval(updateMessages, 10000);
