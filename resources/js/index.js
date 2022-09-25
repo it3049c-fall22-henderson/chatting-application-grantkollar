@@ -54,6 +54,10 @@ function sendMessages(username, text) {
 
   $.post(serverURL, newMessage);
 }
+updateMessages();
+setInterval(updateMessages, 10000);
+
+
 sendButton.addEventListener("click", function(sendButtonClickEvent) {
   sendButtonClickEvent.preventDefault();
   const sender = nameInput.value;
@@ -62,5 +66,3 @@ sendButton.addEventListener("click", function(sendButtonClickEvent) {
   sendMessages(sender,message);
   myMessage.value = "";
 });
-updateMessages();
-setInterval(updateMessages, 10000);
