@@ -4,7 +4,8 @@ const sendButton = document.getElementById("send-button");
 const chatBox = document.getElementById("chat");
 const usernameButton = document.getElementById("save-username")
 const serverURL = `https://it3049c-chat-application.herokuapp.com/messages`;
-
+const darkModeButton = document.getElementById("dark-mode");
+let darkmodeEnabled = false;
 function fetchMessages(){
   return fetch(serverURL)
   .then(response => response.json());
@@ -17,6 +18,25 @@ async function updateMessages(){
   });
   chatBox.innerHTML = formattedMessages;
   
+}
+function darkMode(){
+    darkModeButton.addEventListener("click", function(){
+        if(!darkmodeEnabled){
+        darkmodeEnabled = true;
+        document.body.style.background = "rgb(27, 27, 27)";
+        document.querySelector('footer').style.background = "rgb(27, 27, 27)";
+        document.getElementById("jumbo").style.background = "rgb(27, 27, 27)";
+        document.querySelector("h1").style.color = "white"
+        }
+        else{
+        darkmodeEnabled = false;
+        document.body.style.background = "white";
+        document.querySelector('footer').style.background = "white";
+        document.getElementById("jumbo").style.background = "rgb(235, 235, 235)";
+        document.querySelector("h1").style.color = "black"
+        }
+
+    });
 }
 function userName(){
 myMessage.disabled = true;
@@ -73,6 +93,7 @@ function sendMessages(username, text) {
       body: JSON.stringify(newMessage)
   });
 }
+darkMode();
 userName();
 updateMessages();
 setInterval(updateMessages, 10000);
