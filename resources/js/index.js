@@ -19,6 +19,7 @@ async function updateMessages(){
   chatBox.innerHTML = formattedMessages;
   
 }
+//dark mode?
 function darkMode(){
     darkModeButton.addEventListener("click", function(){
         if(!darkmodeEnabled){
