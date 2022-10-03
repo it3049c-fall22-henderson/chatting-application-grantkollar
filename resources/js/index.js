@@ -2,6 +2,7 @@ const nameInput = document.getElementById("my-name-input");
 const myMessage = document.getElementById("my-message");
 const sendButton = document.getElementById("send-button");
 const chatBox = document.getElementById("chat");
+const usernameButton = document.getElementById("save-username")
 const serverURL = `https://it3049c-chat-application.herokuapp.com/messages`;
 
 function fetchMessages(){
@@ -16,6 +17,18 @@ async function updateMessages(){
   });
   chatBox.innerHTML = formattedMessages;
   
+}
+function userName(){
+myMessage.disabled = true;
+if(localStorage.getItem('username') != null){
+    nameInput.value = localStorage.getItem('username')
+    myMessage.disabled = false;
+}
+usernameButton.addEventListener("click",function(usernameClickEvent){
+usernameClickEvent.preventDefault();
+localStorage.setItem('username',nameInput.value);
+myMessage.disabled = false;
+});
 }
 function formatMessage(message, myNameInput) {
   const time = new Date(message.timestamp);
@@ -60,6 +73,7 @@ function sendMessages(username, text) {
       body: JSON.stringify(newMessage)
   });
 }
+userName();
 updateMessages();
 setInterval(updateMessages, 10000);
 
